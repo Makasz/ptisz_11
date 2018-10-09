@@ -1,8 +1,7 @@
 import math
-import numpy as np
 
-k = 0
-h = 0.6
+k = 7
+h = 0.2
 
 number_of_instances = []
 current_instace = -1
@@ -23,18 +22,18 @@ print("Instance " + str(k) + ": " + str(instance[k]))
 p_sum = sum([int(x[0]) for x in instance[k]])
 print("Sum of p(i): " + str(p_sum))
 
-d = p_sum * float(h)
+d = round(p_sum * float(h))
 print("d: " + str(d))
 e_ordered = sorted(instance[k], key = lambda x: int(x[1]) - int(x[2])) #sorted by early - tard
 # print(e_ordered)
-penalty = 0 
+penalty = 0
 time = 0
 for i in e_ordered:
     time += int(i[0])
     if time < d:
-        penalty += int(i[1])
-    if tiem > d:
-        penalty += int(i[2])
+        penalty += int(i[1]) * abs(time - d)
+    if time > d:
+        penalty += int(i[2]) * abs(time - d)
 print("Penalty: " + str(penalty))
 
 
